@@ -2,4 +2,4 @@
 
 It is the team color...
 
-- The Avengers
+... The Avengers
