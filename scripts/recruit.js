@@ -44,10 +44,10 @@ function make_preset_list(){
 function recruit(){
     for (i=0 ; i < village_list.length; i++){
         for (j=0; j < presets_recruit.length; j++){
-			socketService.emit(routeProvider.RECRUIT_PRESET, {
-				village_id: village_list[i],
-				preset_id: presets_recruit[j]
-			});
+            socketService.emit(routeProvider.RECRUIT_PRESET, {
+                village_id: village_list[i],
+		preset_id: presets_recruit[j]
+	    });
         }
     }
 }
