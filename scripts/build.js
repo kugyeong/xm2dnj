@@ -1,4 +1,4 @@
-// 마을 개수가 10개 이하일 때 사용하는 건물 자동 건설 스크립트
+// 건물 자동 건설 스크립트
 
 window.socketService = window.injector.get('socketService');
 window.routeProvider = window.injector.get('routeProvider');
@@ -21,12 +21,12 @@ var BARRACKS_HC = 21;
 var MAX_MARKET = 25;
 
 
-function makeVillage_list(){
-    socketService.emit(routeProvider.CHAR_GET_INFO, {}, function(data){
+function make_village_list(){
+    socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data){
         for(i=0; i < data.villages.length; i++){
             console.log(data.villages[i].name)
-            console.log(data.villages[i].villageId)
-            village_list.push(data.villages[i].villageId)
+            console.log(data.villages[i].id)
+            village_list.push(data.villages[i].id)
         }
     });
     setTimeout(buildBuildings, 5000);
@@ -90,4 +90,5 @@ function buildBuildings(){
 }
 
 console.log("It's BUILDING time! ^^");
-makeVillage_list();
+setTimeout(make_village_list, 5000);
+

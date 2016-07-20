@@ -8,17 +8,15 @@ window.routeProvider = window.injector.get('routeProvider');
 var village_list = [];
 var presets_recruit = [];
 
-console.log("It's recruiting time!");
-
 
 // 현재 플레이어가 소유한 마을의 list
 function make_village_list(){
     console.log("Make village list");
-    socketService.emit(routeProvider.CHAR_GET_INFO, {}, function(data){
+    socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data){
         for(i=0; i < data.villages.length; i++){
             console.log(data.villages[i].name);
-            console.log(data.villages[i].villageId);
-            village_list.push(data.villages[i].villageId);            
+            console.log(data.villages[i].id);
+            village_list.push(data.villages[i].id);
         }
     });
     // 5초 후에 make_preset_list 함수 실행
@@ -46,10 +44,12 @@ function recruit(){
         for (j=0; j < presets_recruit.length; j++){
             socketService.emit(routeProvider.RECRUIT_PRESET, {
                 village_id: village_list[i],
-		preset_id: presets_recruit[j]
-	    });
+                preset_id: presets_recruit[j]
+            });
         }
     }
 }
 
+console.log("It's recruiting time!");
 setTimeout(make_village_list, 5000);
+

@@ -1,6 +1,5 @@
 // 건물 자동 건설 스크립트
-// 마을 개수가 10개를 넘어가면 스크립트 동작이 불안정하므로,
-// 시작 index와 종료 index를 지정하여 10개 단위로 나누어 실행한다.
+// 시작 index와 종료 index를 지정하여 마을 10개 단위로 나누어 실행한다.
 var begin_vill = 0;
 var end_vill = 10;
 
@@ -25,12 +24,12 @@ var BARRACKS_HC = 21;
 var MAX_MARKET = 25;
 
 
-function makeVillage_list(){
-    socketService.emit(routeProvider.CHAR_GET_INFO, {}, function(data){
+function make_village_list(){
+    socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data){
         for(i=begin_vill; i < end_vill; i++){
             console.log(data.villages[i].name)
-            console.log(data.villages[i].villageId)
-            village_list.push(data.villages[i].villageId)
+            console.log(data.villages[i].id)
+            village_list.push(data.villages[i].id)
         }
     });
     setTimeout(buildBuildings, 5000);
@@ -94,4 +93,5 @@ function buildBuildings(){
 }
 
 console.log("It's BUILDING time! ^^");
-makeVillage_list();
+setTimeout(make_village_list, 5000);
+

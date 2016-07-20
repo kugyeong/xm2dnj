@@ -2,8 +2,6 @@
 // 각 마을마다 뽑고 싶은 유닛을 프리셋으로 지정해야 한다.
 // 이 때 프리셋 이름에 다음 글자가 포함되어야 실행한다: rec
 
-// 마을이 10개를 넘어가면 스크립트가 제대로 실행되지 않고 뻗음
-// 10개씩 나눠서 스크립트를 돌려야 안정적으로 운영됨
 var begin_vill = 0;
 var end_vill = 10;
 
@@ -13,17 +11,15 @@ window.routeProvider = window.injector.get('routeProvider');
 var village_list = [];
 var presets_recruit = [];
 
-console.log("It's recruiting time!");
-
 
 // 현재 플레이어가 소유한 마을의 list
 function make_village_list(){
     console.log("Make village list");
-    socketService.emit(routeProvider.CHAR_GET_INFO, {}, function(data){
+    socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data){
         for(i=begin_vill; i < end_vill; i++){
             console.log(data.villages[i].name);
-            console.log(data.villages[i].villageId);
-            village_list.push(data.villages[i].villageId);            
+            console.log(data.villages[i].id);
+            village_list.push(data.villages[i].id);
         }
     });
     // 5초 후에 make_preset_list 함수 실행
@@ -57,4 +53,6 @@ function recruit(){
     }
 }
 
+console.log("It's recruiting time!");
 setTimeout(make_village_list, 5000);
+
