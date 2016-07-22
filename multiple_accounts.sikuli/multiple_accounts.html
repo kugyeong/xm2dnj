@@ -67,53 +67,63 @@
    </head>
 <body>
 <div class="info">
-<h2>multiple_accounts_build_farm.sikuli</h2> <a href="multiple_accounts_build_farm.zip">(Download this script)</a>
+<h2>multiple_accounts.sikuli</h2> <a href="multiple_accounts.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
+<span class="cmt"># We assume that</span>
+<span class="cmt"># 1. We use Firefox.</span>
+<span class="cmt"># 2. The password has already stored in Firefox.</span>
+
 <span class="cmt"># 멀티 계정 관리</span>
 login_list = [
-        (아이디,비밀번호),
-        (아이디,비밀번호),
-        (아이디,비밀번호),
+        <span class="str">"아이디"</span>,
+        <span class="str">"아이디"</span>,
+        <span class="str">"아이디"</span>,
         ]
+
+<span class="cmt"># ex. Total villages = 4 * 10 = 40</span>
+vill_iter = <span class="dig">4</span> <span class="cmt"># You should edit this</span>
 
 
 <span class="kw">def</span> open_browser():
     <span class="skw">sleep</span>(<span class="dig">5</span>)
-    openApp(<span class="str">"chromium-browser"</span>)
-    <span class="skw">wait</span>(<img src="1463996150597.png" />, <span class="dig">30</span>)
-    <span class="skw">click</span>(<img src="1463996022613.png" />)
-    <span class="skw">type</span>(<span class="str">"www.tribalwars2.com"</span>+Key.ENTER)
-    <span class="skw">wait</span>(<img src="1463997177505.png" />, <span class="dig">30</span>)
+    openApp(<span class="str">"firefox"</span>) <span class="cmt"># We use Firefox, because the script can work stably. More stable than Chrome.</span>
+    <span class="skw">sleep</span>(<span class="dig">10</span>)
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    <span class="skw">wait</span>(<img src="1469194780023.png" />,<span class="dig">30</span>)
+    <span class="skw">click</span>(<img src="1469194780023.png" />)
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    <span class="skw">type</span>(<span class="str">"www."</span>)
+    <span class="skw">sleep</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"tribal"</span>)
+    <span class="skw">sleep</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"wars2."</span>)
+    <span class="skw">sleep</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"com"</span>)
+    <span class="skw">sleep</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">wait</span>(<img src="1469195055526.png" />,<span class="dig">30</span>)
 
 <span class="kw">def</span> close_browser():
     <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
     <span class="skw">sleep</span>(<span class="dig">5</span>)
 
 <span class="kw">def</span> pop_up_handling():
-    <span class="kw">if</span> exists(<img src="1464578586745.png" />):
-        <span class="skw">click</span>(<img src="1464578586745.png" />)
-        <span class="skw">sleep</span>(<span class="dig">5</span>)
-
-    <span class="kw">if</span> exists(<img src="1464578628552.png" />):
-        <span class="skw">click</span>(<img src="1464578720862.png" />)
-        <span class="skw">type</span>(<span class="str">"0000"</span>+Key.ENTER)
-        <span class="skw">sleep</span>(<span class="dig">5</span>)
-
-<span class="kw">def</span> pop_up_handling2():
-    <span class="cmt"># Claim pop up    </span>
-    <span class="kw">if</span> exists(<img src="1464079346152.png" />, <span class="dig">5</span>):
-        <span class="skw">click</span>(<img src="1464079346152.png" />)
+    <span class="cmt"># Claim pop up</span>
+    <span class="kw">if</span> exists(<img src="1469199662214.png" />,<span class="dig">10</span>):
+        <span class="skw">click</span>(<img src="1469199662214.png" />)
         <span class="skw">sleep</span>(<span class="dig">5</span>)
 
 <span class="kw">def</span> login(account):
-    <span class="skw">click</span>(<img src="1463996706288.png" />)
-    <span class="skw">type</span>(account[<span class="dig">0</span>]+Key.TAB+account[<span class="dig">1</span>]+Key.ENTER)
-
-    pop_up_handling()
+    <span class="skw">click</span>(<img src="1469195035292.png" />)
+    <span class="skw">type</span>(account) <span class="cmt"># id</span>
+    <span class="skw">sleep</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># We assume that the password has already stored in Firefox.</span>
+    <span class="skw">sleep</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.ENTER)
     <span class="skw">sleep</span>(<span class="dig">5</span>)
-    <span class="kw">if</span> exists(<img src="1464839920474.png" />, <span class="dig">120</span>):
-        <span class="skw">click</span>(<img src="1464839920474.png" />)
+    <span class="skw">wait</span>(<img src="1469196068206.png" />,<span class="dig">30</span>)
+    <span class="skw">click</span>(<img src="1469196068206.png" />)
 
 <span class="kw">def</span> wait_for_loading():
     <span class="skw">sleep</span>(<span class="dig">5</span>)
@@ -128,16 +138,20 @@ login_list = [
     <span class="skw">sleep</span>(<span class="dig">5</span>)
 
     <span class="cmt"># 마을이 너무 많은 계정일 경우 마을 10개 단위로 컨트롤</span>
-    <span class="kw">if</span> account[<span class="dig">0</span>] == <span class="str">"memory.killer"</span>:
-        <span class="kw">if</span> loop % <span class="dig">2</span> == <span class="dig">1</span>:
+    <span class="kw">if</span> account == <span class="str">"memory.killer"</span>:
+        <span class="kw">if</span> loop % vill_iter == <span class="dig">1</span>:
             <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/build1.js | xclip -i -selection clipboard"</span>+Key.ENTER)
-        <span class="kw">elif</span> loop % <span class="dig">2</span> == <span class="dig">0</span>:
+        <span class="kw">elif</span> loop % vill_iter == <span class="dig">2</span>:
             <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/build2.js | xclip -i -selection clipboard"</span>+Key.ENTER)
+        <span class="kw">elif</span> loop % vill_iter == <span class="dig">3</span>:
+            <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/build3.js | xclip -i -selection clipboard"</span>+Key.ENTER)
+        <span class="kw">else</span>:
+            <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/build4.js | xclip -i -selection clipboard"</span>+Key.ENTER)
     <span class="kw">else</span>:
         <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/build.js | xclip -i -selection clipboard"</span>+Key.ENTER)
 
     <span class="skw">sleep</span>(<span class="dig">5</span>)
-    <span class="skw">click</span>(<img src="1463996268415.png" />)
+    <span class="skw">click</span>(<img src="1469194883617.png" />)
     <span class="skw">sleep</span>(<span class="dig">5</span>)
     cb = Env.getClipboard()
     paste(cb)
@@ -149,16 +163,20 @@ login_list = [
     <span class="skw">sleep</span>(<span class="dig">5</span>)
 
     <span class="cmt"># 마을이 너무 많은 계정일 경우 마을 10개 단위로 컨트롤</span>
-    <span class="kw">if</span> account[<span class="dig">0</span>] == <span class="str">"memory.killer"</span>:
-        <span class="kw">if</span> loop % <span class="dig">2</span> == <span class="dig">1</span>:
+    <span class="kw">if</span> account == <span class="str">"memory.killer"</span>:
+        <span class="kw">if</span> loop % vill_iter == <span class="dig">1</span>:
             <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/farm1.js | xclip -i -selection clipboard"</span>+Key.ENTER)
-        <span class="kw">elif</span> loop % <span class="dig">2</span> == <span class="dig">0</span>:
+        <span class="kw">elif</span> loop % vill_iter == <span class="dig">2</span>:
             <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/farm2.js | xclip -i -selection clipboard"</span>+Key.ENTER)
+        <span class="kw">elif</span> loop % vill_iter == <span class="dig">3</span>:
+            <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/farm3.js | xclip -i -selection clipboard"</span>+Key.ENTER)
+        <span class="kw">else</span>:
+            <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/farm4.js | xclip -i -selection clipboard"</span>+Key.ENTER)
     <span class="kw">else</span>:
         <span class="skw">type</span>(<span class="str">"cat ~/etc/tw/scripts/farm.js | xclip -i -selection clipboard"</span>+Key.ENTER)
 
     <span class="skw">sleep</span>(<span class="dig">5</span>)
-    <span class="skw">click</span>(<img src="1463996268415.png" />)
+    <span class="skw">click</span>(<img src="1469194883617.png" />)
     <span class="skw">sleep</span>(<span class="dig">5</span>)
     cb = Env.getClipboard()
     paste(cb)
@@ -174,7 +192,7 @@ loop=<span class="dig">1</span>
         open_browser()
         login(account)
         wait_for_loading()
-        pop_up_handling2()
+        pop_up_handling()
         open_console()
         building(account, loop)
         close_browser()
@@ -183,7 +201,7 @@ loop=<span class="dig">1</span>
         open_browser()
         login(account)
         wait_for_loading()
-        pop_up_handling2()
+        pop_up_handling()
         open_console()
         farming(account, loop)
         close_browser()
@@ -192,6 +210,7 @@ loop=<span class="dig">1</span>
     <span class="cmt">#################################################################</span>
     <span class="cmt"># wait for next iteration...</span>
     loop += <span class="dig">1</span>
+
     <span class="skw">sleep</span>(<span class="dig">90</span>*<span class="dig">60</span>) <span class="cmt"># 90분 마다 스크립트 실행</span>
     <span class="cmt"># end of "while True:"</span>
 
