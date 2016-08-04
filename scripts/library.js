@@ -125,7 +125,7 @@ function write_vil_info_file(vil) {
         vil_info += ",res_iron:"+data.resources.iron;
         vil_info += ",res_food:"+data.resources.food;
         vil_info += ",preceptory_order:"+data.preceptory_order;
-        vil_info += ",loyalty:"+data.loyalty;
+        vil_info += ",loyalty:"+parseInt(data.loyalty);
 
         console.log(data.name);
         /*
@@ -259,7 +259,7 @@ function write_file(vil) {
     console.save(vil_info, vil+".txt");
 }
 
-farming_units = {'spear':400,'sword':0,'archer':400,'axe':400,'light_cavalry':200,'mounted_archer':200,'ram':0,'catapult':0,'heavy_cavalry':100};
+farming_units = {'spear':400,'sword':400,'archer':400,'axe':400,'light_cavalry':200,'mounted_archer':200,'ram':0,'catapult':0,'heavy_cavalry':100};
 farming_officers = {'bastard':false, 'leader':false, 'loot_master':false, 'medic':false, 'scout':false, 'supporter':false};
 var mark = [];
 var barbfarm = [];
