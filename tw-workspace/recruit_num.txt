@@ -1,0 +1,11 @@
+spear:20
+sword:20
+axe:20
+archer:20
+light_cavalry:10
+mounted_archer:10
+ram:2
+catapult:0
+heavy_cavalry:5
+trebuchet:6
+doppelsoldner:6

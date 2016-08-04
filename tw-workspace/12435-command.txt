@@ -1,0 +1,1 @@
+go_farm(12435,594,472,{'spear':3600,'sword':1121,'archer':1488,'axe':429,'light_cavalry':373,'mounted_archer':341,'ram':5,'catapult':1,'heavy_cavalry':1746})
