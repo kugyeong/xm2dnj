@@ -89,7 +89,7 @@ def make_vil_list():
             load_library()
             type(Key.ENTER)
     click("cmd_prompt.PNG")
-    type("move /Y"+download_path+"\\global.txt "+tw_workspace_path+Key.ENTER)
+    type("move /Y "+download_path+"\\global.txt "+tw_workspace_path+Key.ENTER)
     sleep(2)
     click("chrome-icon.png")
     sleep(2)
@@ -106,7 +106,7 @@ def make_vil_info(vil_id):
             type(Key.ENTER)
             
     click("cmd_prompt.PNG")
-    type("move /Y"+download_path+"\\"+vil_id+".txt "+tw_workspace_path+Key.ENTER)
+    type("move /Y "+download_path+"\\"+vil_id+".txt "+tw_workspace_path+Key.ENTER)
 
 def make_command(vil_id):
     tag = strftime("%Y%m%d%H%M") + "-" + vil_id;

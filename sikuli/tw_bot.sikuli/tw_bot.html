@@ -161,8 +161,7 @@ script_path = workspace_path + <span class="str">"\\scripts"</span>
             load_library()
             <span class="skw">type</span>(Key.ENTER)
     <span class="skw">click</span>(<span class="str">"cmd_prompt.PNG"</span>)
-    <span class="skw">type</span>(<span class="str">"del "</span>+tw_workspace_path+<span class="str">"\\global.txt"</span>+Key.ENTER);
-    <span class="skw">type</span>(<span class="str">"move "</span>+download_path+<span class="str">"\\global.txt "</span>+tw_workspace_path+Key.ENTER)
+    <span class="skw">type</span>(<span class="str">"move /Y "</span>+download_path+<span class="str">"\\global.txt "</span>+tw_workspace_path+Key.ENTER)
     <span class="skw">sleep</span>(<span class="dig">2</span>)
     <span class="skw">click</span>(<img src="chrome-icon.png" />)
     <span class="skw">sleep</span>(<span class="dig">2</span>)
@@ -179,11 +178,7 @@ script_path = workspace_path + <span class="str">"\\scripts"</span>
             <span class="skw">type</span>(Key.ENTER)
 
     <span class="skw">click</span>(<span class="str">"cmd_prompt.PNG"</span>)
-    <span class="skw">type</span>(<span class="str">"del "</span>+tw_workspace_path+<span class="str">"\\"</span>+vil_id+<span class="str">".txt"</span>+Key.ENTER);
-    <span class="skw">sleep</span>(<span class="dig">1</span>)
-    <span class="skw">type</span>(<span class="str">"del "</span>+tw_workspace_path+<span class="str">"\\"</span>+vil_id+<span class="str">"-command.txt"</span>+Key.ENTER);
-    <span class="skw">sleep</span>(<span class="dig">1</span>)
-    <span class="skw">type</span>(<span class="str">"move "</span>+download_path+<span class="str">"\\"</span>+vil_id+<span class="str">".txt "</span>+tw_workspace_path+Key.ENTER)
+    <span class="skw">type</span>(<span class="str">"move /Y "</span>+download_path+<span class="str">"\\"</span>+vil_id+<span class="str">".txt "</span>+tw_workspace_path+Key.ENTER)
 
 <span class="kw">def</span> make_command(vil_id):
     tag = strftime(<span class="str">"%Y%m%d%H%M"</span>) + <span class="str">"-"</span> + vil_id;
