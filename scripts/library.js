@@ -356,7 +356,31 @@ function go_farm(vil,attack_x,attack_y,units) {
     barbfarm = [];
     preset_id = -1;
     if (count_per_farming != 0)
-        setTimeout(get_barb_list, 10,vil,attack_x-14,attack_y+14);
+        setTimeout(get_barb_list, 10,vil,getRotatedTargetXpos(attack_x,attack_y), getRotatedTargetYpos(attack_x,attack_y));
+}
+
+function getRotatedTargetXpos(xPos, yPos) {
+    var dt = new Date();
+    return getCircleXPos(getRadian(dt.getHours()), xPos, yPos);
+}
+
+function getRotatedTargetYpos(xPos, yPos) {
+    var dt = new Date();
+    return getCircleYPos(getRadian(dt.getHours()), xPos, yPos);
+}
+
+function getRadian(time) {
+    return time * 15 *  (Math.PI/180);
+}
+
+function getCircleXPos(radian, cx, cy) {
+    var tx = parseInt(cx + 20 * Math.cos(radian));
+    return tx;
+}
+
+function getCircleYPos(radian, cx, cy) {
+    var ty = parseInt(cy + 20 * Math.sin(radian));
+    return ty;
 }
 
 make_village_list()
