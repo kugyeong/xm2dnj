@@ -320,20 +320,6 @@ public class Main {
 		String reloc_command = "";
 		while (total > sum) {
 			int temp_sum = sum;
-			if (map.get("catapult") > 5) {
-				cat_num += 5;
-				map.put("catapult", map.get("catapult") - 5);
-				sum += 5 * recruitCost.get("catapult")[3];
-				if (sum > total)
-					break;
-			}
-			if (map.get("ram") > 5) {
-				ram_num += 5;
-				map.put("ram", map.get("ram") - 5);
-				sum += 5 * recruitCost.get("ram")[3];
-				if (sum > total)
-					break;
-			}
 			if (map.get("heavy_cavalry") > 10) {
 				hc_num += 10;
 				map.put("heavy_cavalry", map.get("heavy_cavalry") - 10);
@@ -835,7 +821,7 @@ public class Main {
 					commands += "vil_build(" + map.get("id")
 							+ ", \"barracks\");";
 					}
-				} else if (map.get("tavern_lvl") < 15) {
+				} else if (map.get("tavern_lvl") < 14) {
 					if(map.get("res_wood") >= 5900
 						&& map.get("res_clay") >= 4900
 						&& map.get("res_iron") >= 3500

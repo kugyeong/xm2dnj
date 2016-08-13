@@ -55,6 +55,12 @@ function village_get_village(vil) {
 function mint_coins(vil, m_amount) {
     socketService.emit(routeProvider.MINT_COINS, {village_id: vil, amount: m_amount}, function(data){   
     }) 
+    /*
+    var res = m_amount * 25000;
+    socketService.emit(routeProvider.TRIBE_SKILL_DONATE, {village_id:vil, crowns:0, resources:{'wood':res, 'clay':res, 'iron':res}}, function(data){
+        console.log(data);
+    });
+    */
 }
 
 function send_custom_army(s_vil, t_vil, a_type, a_units, c_target, a_officers, a_icon) {
@@ -280,7 +286,25 @@ function get_barb_list(vil,attack_x,attack_y) {
             }
         }
     });
-    setTimeout(save_new_preset, 3000 ,vil, "temp_farming", 65805, farming_officers, farming_units);
+    setTimeout(shuffle, 3000, vil, barbfarm);
+}
+
+function shuffle(vil, array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  setTimeout(save_new_preset, 1000 ,vil, "temp_farming", 65805, farming_officers, farming_units);
 }
 
 function save_new_preset(vil,p_name,p_icon,p_officers,p_units) {
@@ -338,7 +362,7 @@ function send_farm_preset(vil) {
         }
     }
     // mark that barb id
-    if (farming_count > 300 || avail_barb.length == 0)
+    if (farming_count > 1000 || avail_barb.length == 0)
     {
         var shift_count = parseInt(farming_count / 15);
         for (i=0; i<shift_count; i++)
@@ -351,8 +375,8 @@ function send_farm_preset(vil) {
 
 function go_farm(vil,attack_x,attack_y,units) {
     count_per_farming = parseInt(units['spear'] / farming_units['spear']);
-    if(count_per_farming > 3)
-        count_per_farming = 3;
+    if(count_per_farming > 20)
+        count_per_farming = 20;
     barbfarm = [];
     preset_id = -1;
     if (count_per_farming != 0)
