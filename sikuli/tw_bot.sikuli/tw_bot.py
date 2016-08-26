@@ -7,7 +7,7 @@ login_list = [
 
 village_id_list = []
 download_path = "C:\\Users\\Kugyeong\\Downloads"
-workspace_path = "C:\\python-workspace\\xm2dnj-master"
+workspace_path = "C:\\Users\\Kugyeong\\git-workspace\\xm2dnj"
 tw_workspace_path = workspace_path + "\\tw-workspace"
 script_path = workspace_path + "\\scripts"
 
