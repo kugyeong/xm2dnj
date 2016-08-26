@@ -53,14 +53,15 @@ function village_get_village(vil) {
 }
 
 function mint_coins(vil, m_amount) {
-    socketService.emit(routeProvider.MINT_COINS, {village_id: vil, amount: m_amount}, function(data){   
-    }) 
     /*
+    socketService.emit(routeProvider.MINT_COINS, {village_id: vil, amount: m_amount}, function(data){   
+    })
+    */ 
+    
     var res = m_amount * 25000;
     socketService.emit(routeProvider.TRIBE_SKILL_DONATE, {village_id:vil, crowns:0, resources:{'wood':res, 'clay':res, 'iron':res}}, function(data){
-        console.log(data);
     });
-    */
+    
 }
 
 function send_custom_army(s_vil, t_vil, a_type, a_units, c_target, a_officers, a_icon) {
@@ -250,7 +251,7 @@ function write_global_file(vil_ids) {
         //village_list = village_list.substr(0, village_list.length -1);
 
     });
-    setTimeout(write_global_file2, 5000);
+    setTimeout(write_global_file2, 10000);
 }
 
 function write_list_file() {
@@ -265,16 +266,16 @@ function write_file(vil) {
     console.save(vil_info, vil+".txt");
 }
 
-farming_units = {'spear':400,'sword':400,'archer':400,'axe':400,'light_cavalry':200,'mounted_archer':200,'ram':0,'catapult':0,'heavy_cavalry':100};
+farming_units = {'spear':9999,'sword':9999,'archer':9999,'axe':9999,'light_cavalry':9999,'mounted_archer':9999,'ram':0,'catapult':0,'heavy_cavalry':9999};
 farming_officers = {'bastard':false, 'leader':false, 'loot_master':false, 'medic':false, 'scout':false, 'supporter':false};
 var mark = [];
 var barbfarm = [];
 var preset_id;
 var farming_count = 0;
 var count_per_farming;
-function get_barb_list(vil,attack_x,attack_y) {
-    attack_x += (getRandomInt(0, 20) - 10);
-    attack_y += (getRandomInt(0, 20) - 10);
+function get_barb_list(vil,attack_x,attack_y, units) {
+    //attack_x += (getRandomInt(0, 20) - 10);
+    //attack_y += (getRandomInt(0, 20) - 10);
     socketService.emit(routeProvider.MAP_GETVILLAGES, {x:(attack_x), y:(attack_y), width:20, height:20}, function(data){
         for (j = 0; j < data.villages.length; j++){
             // character_name이 null이면 바바리안 (회색 마을)
@@ -286,10 +287,10 @@ function get_barb_list(vil,attack_x,attack_y) {
             }
         }
     });
-    setTimeout(shuffle, 3000, vil, barbfarm);
+    setTimeout(shuffle, 3000, vil, barbfarm, units);
 }
 
-function shuffle(vil, array) {
+function shuffle(vil, array, units) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -304,7 +305,7 @@ function shuffle(vil, array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-  setTimeout(save_new_preset, 1000 ,vil, "temp_farming", 65805, farming_officers, farming_units);
+  setTimeout(save_new_preset, 1000 ,vil, "temp_farming", 65805, farming_officers, units);
 }
 
 function save_new_preset(vil,p_name,p_icon,p_officers,p_units) {
@@ -374,13 +375,27 @@ function send_farm_preset(vil) {
 }
 
 function go_farm(vil,attack_x,attack_y,units) {
-    count_per_farming = parseInt(units['spear'] / farming_units['spear']);
-    if(count_per_farming > 20)
-        count_per_farming = 20;
+    //count_per_farming = parseInt(units['spear'] / farming_units['spear']);
+    //if(count_per_farming > 20)
+    //    count_per_farming = 20;
     barbfarm = [];
     preset_id = -1;
+    var total = units['spear'] + units['sword'] + units['archer'] + units['axe'] + units['heavy_cavalry'];
+    units['spear'] = parseInt(units['spear']);
+    units['sword'] = parseInt(units['sword']);
+    units['archer'] = parseInt(units['archer']);
+    units['axe'] = parseInt(units['axe']);
+    units['light_cavalry'] = 0;
+    units['mounted_archer'] = 0;
+    units['heavy_cavalry'] = parseInt(units['heavy_cavalry']);
+    units['ram'] = 0;
+    units['catapult'] = 0;
+    if (total > 400)
+        count_per_farming = 1;
+    else
+        count_per_farming = 0;
     if (count_per_farming != 0)
-        setTimeout(get_barb_list, 10,vil,getRotatedTargetXpos(attack_x,attack_y), getRotatedTargetYpos(attack_x,attack_y));
+        setTimeout(get_barb_list, 10,vil,getRotatedTargetXpos(attack_x,attack_y), getRotatedTargetYpos(attack_x,attack_y), units);
 }
 
 function getRotatedTargetXpos(xPos, yPos) {
@@ -398,12 +413,12 @@ function getRadian(time) {
 }
 
 function getCircleXPos(radian, cx, cy) {
-    var tx = parseInt(cx + 20 * Math.cos(radian));
+    var tx = parseInt(cx + 5 * Math.cos(radian));
     return tx;
 }
 
 function getCircleYPos(radian, cx, cy) {
-    var ty = parseInt(cy + 20 * Math.sin(radian));
+    var ty = parseInt(cy + 5 * Math.sin(radian));
     return ty;
 }
 
